@@ -8,13 +8,18 @@ Expense Tracker is a high-performance, asynchronous RESTful API backend designed
 __Technical Highlights & System Architecture__
 <br>
 <br>
-​-__Asynchronous Enterprise Stack:__ Engineered entirely with __FastAPI__ utilizing Python's `asyncio` ecosystem to maximize concurrent throughput. It features persistent storage mapped through __SQLAlchemy ORM__ to a __MySQL__ relational database, optimized with explicit composite indexing and foreign key cascade deletion integrity.
-​- __Decoupled Multi-Instance Memory Tier:__ Implements three isolated Redis data pools to prevent cross-contamination of infrastructure memory:
-​ - __High-Speed Cache Engine:__ Reduces relational database load by executing an eviction/write-through cache pattern for persistent user transactions.
-​ - __Atomic Sliding Window Rate Limiter:__ Protects sensitive auth and account gateways against brute-force/DDoS requests using Redis Sorted Sets (`ZSET`) grouped within atomic pipeline round-trips.
-​ - __Time-Bound Ephemeral Key Store:__ Manages stateful lifecycle tracking for out-of-band security authentications.
-ions.
-​- __Robust Identity Shield & Session Lifecycles:__ Features a robust dual-token security topology (__JWT-based Access & Refresh Token rotation__) transported safely via encrypted headers and `HttpOnly`, `SameSite=Strict` browser cookies to systematically insulate the application against XSS and CSRF ambient request attacks.
+​__Technical Highlights & System Architecture__
+
+- __Asynchronous Enterprise Stack:__ Engineered entirely with __FastAPI__ utilizing Python's `asyncio` ecosystem to maximize concurrent throughput. It features persistent storage mapped through __SQLAlchemy ORM__ to a __MySQL__ relational database, optimized with explicit composite indexing and foreign key cascade deletion integrity.
+- __Decoupled Multi-Instance Memory Tier:__ Implements three isolated Redis data pools to prevent cross-contamination of infrastructure memory:
+    - __High-Speed Cache Engine:__ Reduces relational database load by executing an eviction/write-through cache pattern for persistent user transactions.
+    - __Atomic Sliding Window Rate Limiter:__ Protects sensitive auth and account gateways against brute-force/DDoS requests using Redis Sorted Sets (`ZSET`) grouped within atomic pipeline round-trips.
+    - __Time-Bound Ephemeral Key Store:__ Manages stateful lifecycle tracking for out-of-band security authentications.
+- __Robust Identity Shield & Session Lifecycles:__ Features a robust dual-token security topology (__JWT-based Access & Refresh Token rotation__) transported safely via encrypted headers and `HttpOnly`, `SameSite=Strict` browser cookies to systematically insulate the application against XSS and CSRF ambient request attacks.
+- __Defensive Cryptography & Security Controls:__ Enforces maximum security at the API gateway through memory-hard __Argon2id__ password hashing resistant to GPU parallel cracking, utilizing cryptographic constant-time string matching (`secrets.compare_digest`) to neutralize side-channel timing attacks.
+- __Server-Side Data Aggregation & Analytical Engines:__ Minimizes API network overhead by offloading heavy arithmetic calculation onto the database engine. Leverages SQL data type casting and server-side mathematical aggregations (`SUM`, `AVG`, `MIN`, `MAX`, `COUNT`) to compile granular, date-bounded itemized financial metrics instantly.
+- __Non-Blocking Out-of-Band (OOB) Communications:__ Handles secure workflow verification and account recovery routines through __Twilio SMS Gateway__ integration. To preserve zero-latency request processing times, communications are seamlessly offloaded to background execution worker pools using FastAPI BackgroundTasks.
+- __Active Microservices Diagnostics & Telemetry:__ Outfitted with specialized administrative health telemetry endpoints monitoring live service-level connectivity status across all standalone relational, cache, rate-limiting, and external notification networks independently.
 - __Defensive Cryptography & Security Controls:__ Enforces maximum security at the API gateway through memory-hard __Argon2id__ password hashing resistant to GPU parallel cracking, utilizing cryptographic constant-time string matching (`secrets.compare_digest`) to neutralize side-channel timing attacks.
 - __Server-Side Data Aggregation & Analytical Engines:__ Minimizes API network overhead by offloading heavy arithmetic calculation onto the database engine. Leverages SQL data type casting and server-side mathematical aggregations (`SUM`, `AVG`, `MIN`, `MAX`, `COUNT`) to compile granular, date-bounded itemized financial metrics instantly.
 - __Non-Blocking Out-of-Band (OOB) Communications:__ Handles secure workflow verification and account recovery routines through __Twilio SMS Gateway__ integration. To preserve zero-latency request processing times, communications are seamlessly offloaded to background execution worker pools using FastAPI BackgroundTasks.
