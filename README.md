@@ -14,7 +14,7 @@ Expense Tracker is a high-performance, asynchronous RESTful API backend designed
 ## System Architecture
 
 - __Asynchronous Enterprise Stack__: Engineered entirely with FastAPI utilizing Python's asyncio ecosystem to maximize concurrent throughput. It features persistent storage mapped through SQLAlchemy ORM to a MySQL relational database, optimized with explicit composite indexing and foreign key cascade deletion integrity.
-- __Decoupled Multi-Instance Memory Tier__: Implements three isolated Redis data pools to prevent cross-contamination of infrastructure memory:
+- __Decoupled Multi-Instance Memory Tier__: Implements three isolated Redis data pools to prevent cross-contamination of infrastructure memory: 
     - __High-Speed Cache Engine__: Reduces relational database load by executing an eviction/write-through cache pattern for persistent user transactions.
     - __Atomic Sliding Window Rate Limiter__: Protects sensitive auth and account gateways against brute-force/DDoS requests using Redis Sorted Sets (ZSET) grouped within atomic pipeline round-trips.
     - __Time-Bound Ephemeral Key Store__: Manages stateful lifecycle tracking for out-of-band security authentications.
